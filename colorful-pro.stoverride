@@ -1,0 +1,23 @@
+name: 彩云天气 SVIP
+desc: 彩云天气 SVIP
+
+http:
+  rewrite:
+    - ^https:\/\/ad\.caiyunapp\.com\/ - reject
+
+  script:
+    - match: ^https:\/\/biz\.(caiyunapp|cyapi)\.(com|cn)
+      name: cytq
+      type: response
+      timeout: 30
+      require-body: true
+      max-size: 3145728
+
+  mitm:
+    - "*.cyapi.cn"
+    - "*.caiyunapp.com"
+
+script-providers:
+  cytq:
+    url: https://raw.githubusercontent.com/hactrox/stash-overrides/main/colorfulpro.js
+    interval: 86400
